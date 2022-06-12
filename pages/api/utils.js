@@ -13,8 +13,15 @@ const handler = async (req, res) => {
   if (req.method !== "POST") res.end();
 
   if (req.body.task === "clean_database") {
+    await prisma.Application.deleteMany({});
     await prisma.job.deleteMany({});
-    await prisma.user.deleteMany({});
+    await prisma.user.deleteMany({
+      where: {
+        id: {
+          not: "cl46768pc03353sv53ikrybts",
+        },
+      },
+    });
   }
 
   if (req.body.task === "generate_one_job") {

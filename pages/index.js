@@ -20,7 +20,7 @@ const Home = ({ jobs, user }) => {
     );
   }
 
-  if (session && !session.user.name) {
+  if ((session && !session.user.name) || !user.name) {
     router.push("/setup");
   }
 
